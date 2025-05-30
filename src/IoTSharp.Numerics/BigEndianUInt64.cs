@@ -51,6 +51,10 @@ namespace IoTSharp.Numerics
 
         public static bool operator ==(BigEndianUInt64 a, BigEndianUInt64 b) => (UInt64)a == (UInt64)b;
         public static bool operator !=(BigEndianUInt64 a, BigEndianUInt64 b) => (UInt64)a != (UInt64)b;
+
+
+        public static implicit operator BigEndianUInt64(byte[] d) => MemoryMarshal.AsRef<BigEndianUInt64>(d);
+        public static implicit operator byte[](BigEndianUInt64 d) => MemoryMarshal.AsBytes(new ReadOnlySpan<BigEndianUInt64>(ref d)).ToArray();
     }
 
 
