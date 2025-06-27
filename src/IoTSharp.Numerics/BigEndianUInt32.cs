@@ -19,9 +19,7 @@ namespace IoTSharp.Numerics
          BEUI32 data;
         public static implicit operator uint(BigEndianUInt32 d)
         {
-            return BitConverter.IsLittleEndian ?
-                BinaryPrimitives.ReadUInt32BigEndian(d.data) :
-                BinaryPrimitives.ReadUInt32LittleEndian(d.data);
+            return BinaryPrimitives.ReadUInt32BigEndian(d.data);
         }
         public static implicit operator ulong(BigEndianUInt32 d) => (uint)d;
         public static implicit operator long(BigEndianUInt32 d) => (uint)d;
@@ -29,20 +27,14 @@ namespace IoTSharp.Numerics
         public static implicit operator BigEndianUInt32(uint d)
         {
             BigEndianUInt32 bigEndianUInt32 = new BigEndianUInt32();
-            if (BitConverter.IsLittleEndian)
-            {
-                BinaryPrimitives.WriteUInt32BigEndian(bigEndianUInt32.data, d);
-            }
-            else
-            {
-                BinaryPrimitives.WriteUInt32LittleEndian(bigEndianUInt32.data, d);
-            }
+            BinaryPrimitives.WriteUInt32LittleEndian(bigEndianUInt32.data, d);
             return bigEndianUInt32;
         }
-        public readonly bool Equals(BigEndianUInt32 other) => data.Equals(other.data);
-        public readonly override bool Equals([NotNullWhen(true)] object? obj) => obj is BigEndianUInt32 other && Equals(other);
-        public readonly override int GetHashCode() => data.GetHashCode();
-        public readonly override string? ToString() => Convert.ToHexString(data);
+        public  bool Equals(BigEndianUInt32 other) => data.Equals(other.data);
+        public  override bool Equals([NotNullWhen(true)] object? obj) => obj is BigEndianUInt32 other && Equals(other);
+        public  override readonly int GetHashCode() => data.GetHashCode();
+        public  override string? ToString() => ToHexString;
+        public readonly string? ToHexString => Convert.ToHexString(MemoryMarshal.AsBytes(new ReadOnlySpan<BEUI32>(data)));
 
         public static bool operator ==(BigEndianUInt32 a, BigEndianUInt32 b) => (UInt32)a == (UInt32)b;
         public static bool operator !=(BigEndianUInt32 a, BigEndianUInt32 b) => (UInt32)a != (UInt32)b;
