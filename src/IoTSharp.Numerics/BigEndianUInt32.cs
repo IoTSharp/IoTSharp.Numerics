@@ -30,9 +30,10 @@ namespace IoTSharp.Numerics
             BinaryPrimitives.WriteUInt32BigEndian(bigEndianUInt32.data, d);
             return bigEndianUInt32;
         }
-        public  bool Equals(BigEndianUInt32 other) => data[0] == other.data[0] && data[1] == other.data[1] && data[2] == other.data[2] && data[3] == other.data[3];
+        public  readonly bool Equals(BigEndianUInt32 other) => data[0] == other.data[0] && data[1] == other.data[1] && data[2] == other.data[2] && data[3] == other.data[3];
+        public override bool Equals(object? other) => ((other as BigEndianUInt32? != null)) ? Equals((BigEndianUInt32)other) : false;
         public override readonly int GetHashCode() => data[0].GetHashCode() ^ data[1].GetHashCode() ^ data[2].GetHashCode() ^ data[3].GetHashCode();
-        public readonly override string? ToString() => Convert.ToHexString(data);
+        public  override readonly string? ToString() => Convert.ToHexString(data);
 
         public static bool operator ==(BigEndianUInt32 a, BigEndianUInt32 b) => (UInt32)a == (UInt32)b;
         public static bool operator !=(BigEndianUInt32 a, BigEndianUInt32 b) => (UInt32)a != (UInt32)b;

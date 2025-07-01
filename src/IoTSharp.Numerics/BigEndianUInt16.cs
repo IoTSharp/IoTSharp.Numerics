@@ -19,7 +19,7 @@ namespace IoTSharp.Numerics
 
         public static implicit operator ushort(BigEndianUInt16 d)
         {
-            return BinaryPrimitives.ReadUInt16LittleEndian (d.data);
+            return BinaryPrimitives.ReadUInt16LittleEndian(d.data);
         }
         public static implicit operator BigEndianUInt16(ushort d)
         {
@@ -29,6 +29,7 @@ namespace IoTSharp.Numerics
         }
 
         public readonly bool Equals(BigEndianUInt16 other) => data[0] == other.data[0] && data[1] == other.data[1];
+        public override bool Equals(object? other) => ((other as BigEndianUInt16? != null)) ? Equals((BigEndianUInt16)other) : false;
         public readonly override int GetHashCode() => data[0].GetHashCode() ^ data[1].GetHashCode();
         public readonly override string? ToString() => Convert.ToHexString(data);
 

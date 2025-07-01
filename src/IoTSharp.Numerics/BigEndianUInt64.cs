@@ -35,13 +35,13 @@ namespace IoTSharp.Numerics
             BinaryPrimitives.WriteUInt64BigEndian(bigEndianUInt64.data, d);
             return bigEndianUInt64;
         }
-        public readonly bool Equals(BigEndianUInt64 other) => data[0] == other.data[0] && data[1] == other.data[1] && data[2] == other.data[2] && data[3] == other.data[3] &&  data[4] == other.data[4] && data[5] == other.data[5] && data[6] == other.data[6] && data[7] == other.data[7];
-
+        public bool Equals(BigEndianUInt64 other) => data[0] == other.data[0] && data[1] == other.data[1] && data[2] == other.data[2] && data[3] == other.data[3] && data[4] == other.data[4] && data[5] == other.data[5] && data[6] == other.data[6] && data[7] == other.data[7];
+        public override bool Equals(object? other) => ((other as BigEndianUInt64? != null)) ? Equals((BigEndianUInt64)other) : false;
         public readonly override int GetHashCode() => data[0].GetHashCode() ^ data[1].GetHashCode() ^ data[2].GetHashCode() ^ data[3].GetHashCode() ^ data[4].GetHashCode() ^ data[5].GetHashCode() ^ data[6].GetHashCode() ^ data[7].GetHashCode();
         public readonly override string? ToString() => Convert.ToHexString(data);
 
-        public static bool operator ==(BigEndianUInt64 a, BigEndianUInt64 b) => (UInt64)a == (UInt64)b;
-        public static bool operator !=(BigEndianUInt64 a, BigEndianUInt64 b) => (UInt64)a != (UInt64)b;
+        public static bool operator ==(BigEndianUInt64 a, BigEndianUInt64 b) => a.Equals(b);
+        public static bool operator !=(BigEndianUInt64 a, BigEndianUInt64 b) => !a.Equals(b);
 
 
         public static implicit operator BigEndianUInt64(byte[] d) => MemoryMarshal.AsRef<BigEndianUInt64>(d);

@@ -40,6 +40,9 @@ namespace IoTSharp.Numerics
             return BigEndianUInt24;
         }
         public readonly bool Equals(BigEndianUInt24 other) => data[0] == other.data[0] && data[1] == other.data[1] && data[2] == other.data[2];
+
+        public override bool Equals(object? other) => ((other as BigEndianUInt24? != null)) ? Equals((BigEndianUInt24)other) : false;
+
         public readonly override int GetHashCode() => data[0].GetHashCode() ^ data[1].GetHashCode() ^ data[2].GetHashCode();
         public readonly override string? ToString() => Convert.ToHexString(data);
 
