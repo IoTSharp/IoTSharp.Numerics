@@ -19,7 +19,7 @@ namespace IoTSharp.Numerics
          BEUI32 data;
         public static implicit operator uint(BigEndianUInt32 d)
         {
-            return BinaryPrimitives.ReadUInt32BigEndian(d.data);
+            return BinaryPrimitives.ReadUInt32LittleEndian(d.data);
         }
         public static implicit operator ulong(BigEndianUInt32 d) => (uint)d;
         public static implicit operator long(BigEndianUInt32 d) => (uint)d;
@@ -27,14 +27,12 @@ namespace IoTSharp.Numerics
         public static implicit operator BigEndianUInt32(uint d)
         {
             BigEndianUInt32 bigEndianUInt32 = new BigEndianUInt32();
-            BinaryPrimitives.WriteUInt32LittleEndian(bigEndianUInt32.data, d);
+            BinaryPrimitives.WriteUInt32BigEndian(bigEndianUInt32.data, d);
             return bigEndianUInt32;
         }
-        public  bool Equals(BigEndianUInt32 other) => data.Equals(other.data);
-        public  override bool Equals([NotNullWhen(true)] object? obj) => obj is BigEndianUInt32 other && Equals(other);
-        public  override readonly int GetHashCode() => data.GetHashCode();
-        public  override string? ToString() => ToHexString;
-        public readonly string? ToHexString => Convert.ToHexString(MemoryMarshal.AsBytes(new ReadOnlySpan<BEUI32>(data)));
+        public  bool Equals(BigEndianUInt32 other) => data[0] == other.data[0] && data[1] == other.data[1] && data[2] == other.data[2] && data[3] == other.data[3];
+        public override readonly int GetHashCode() => data[0].GetHashCode() ^ data[1].GetHashCode() ^ data[2].GetHashCode() ^ data[3].GetHashCode();
+        public readonly override string? ToString() => Convert.ToHexString(data);
 
         public static bool operator ==(BigEndianUInt32 a, BigEndianUInt32 b) => (UInt32)a == (UInt32)b;
         public static bool operator !=(BigEndianUInt32 a, BigEndianUInt32 b) => (UInt32)a != (UInt32)b;
