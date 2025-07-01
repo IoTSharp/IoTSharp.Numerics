@@ -19,12 +19,12 @@ namespace IoTSharp.Numerics
         BEUI24 data;
         public static implicit operator uint(BigEndianUInt24 d)
         {
-          
-                var bytes = new byte[4];
-                bytes[0] = d.data[0];
-                bytes[1] = d.data[1];
-                bytes[2] = d.data[2];
-                return BinaryPrimitives.ReadUInt32LittleEndian(bytes);
+
+            var bytes = new byte[4];
+            bytes[1] = d.data[0];
+            bytes[2] = d.data[1];
+            bytes[3] = d.data[2];
+            return BinaryPrimitives.ReadUInt32BigEndian(bytes);
         }
         public static implicit operator ulong(BigEndianUInt24 d) => (uint)d;
         public static implicit operator long(BigEndianUInt24 d) => (uint)d;
@@ -49,8 +49,9 @@ namespace IoTSharp.Numerics
         public static bool operator ==(BigEndianUInt24 a, BigEndianUInt24 b) => (UInt32)a == (UInt32)b;
         public static bool operator !=(BigEndianUInt24 a, BigEndianUInt24 b) => (UInt32)a != (UInt32)b;
 
-        public static implicit operator BigEndianUInt24(byte[] d) => MemoryMarshal.AsRef<BigEndianUInt24>(d);
-        public static implicit operator byte[](BigEndianUInt24 d) => MemoryMarshal.AsBytes(new ReadOnlySpan<BigEndianUInt24>(ref d)).ToArray();
+        public static implicit operator BigEndianUInt24(byte[] d) => MemoryMarshal.AsRef<BigEndianUInt24>(new byte[4] { d[0], d[1], d[2],0 });
+
+        public static implicit operator byte[](BigEndianUInt24 d) => MemoryMarshal.AsBytes(new Span<BigEndianUInt24>(ref d)).Slice(0, 3).ToArray();
     }
    
 }

@@ -27,7 +27,7 @@ namespace IoTSharp.Numerics
 
         public static implicit operator ulong(BigEndianUInt64 d)
         {
-            return BinaryPrimitives.ReadUInt64LittleEndian(d.data);
+            return BinaryPrimitives.ReadUInt64BigEndian(d.data);
         }
         public static implicit operator BigEndianUInt64(ulong d)
         {

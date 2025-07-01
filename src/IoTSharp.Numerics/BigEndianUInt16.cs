@@ -16,10 +16,10 @@ namespace IoTSharp.Numerics
     {
         [MarshalAs(UnmanagedType.Struct, SizeConst = 1)]
         BEUI16 data;
-
+     
         public static implicit operator ushort(BigEndianUInt16 d)
         {
-            return BinaryPrimitives.ReadUInt16LittleEndian(d.data);
+            return BinaryPrimitives.ReadUInt16BigEndian(d.data);
         }
         public static implicit operator BigEndianUInt16(ushort d)
         {

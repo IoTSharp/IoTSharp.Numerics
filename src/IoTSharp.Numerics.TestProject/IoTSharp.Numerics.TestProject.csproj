@@ -1,4 +1,4 @@
-<Project Sdk="MSTest.Sdk/3.6.4">
+﻿<Project Sdk="MSTest.Sdk/3.6.4">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -11,10 +11,7 @@
       -->
     <TestingPlatformShowTestsFailure>true</TestingPlatformShowTestsFailure>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="BEHexAreEqualTest.cs" />
-  </ItemGroup>
+ 
 
   <ItemGroup>
     <ProjectReference Include="..\IoTSharp.Numerics\IoTSharp.Numerics.csproj" />

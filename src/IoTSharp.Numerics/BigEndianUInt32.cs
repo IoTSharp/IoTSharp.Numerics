@@ -19,7 +19,7 @@ namespace IoTSharp.Numerics
          BEUI32 data;
         public static implicit operator uint(BigEndianUInt32 d)
         {
-            return BinaryPrimitives.ReadUInt32LittleEndian(d.data);
+            return BinaryPrimitives.ReadUInt32BigEndian(d.data);
         }
         public static implicit operator ulong(BigEndianUInt32 d) => (uint)d;
         public static implicit operator long(BigEndianUInt32 d) => (uint)d;
