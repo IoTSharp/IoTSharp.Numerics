@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0;net9.0;</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageProjectUrl>https://github.com/IoTSharp/IoTSharp.Numerics</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/IoTSharp/IoTSharp.Numerics</RepositoryUrl>
 		<PackageTags>BigEndianUInt16;BigEndianUInt32;BigEndianUInt64</PackageTags>
-		<Version>1.0.1</Version>
-		<AssemblyVersion>1.0.1</AssemblyVersion>
-		<FileVersion>1.0.1</FileVersion>
+		<Version>1.10.1</Version>
+		<AssemblyVersion>1.10.1</AssemblyVersion>
+		<FileVersion>1.10.1</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

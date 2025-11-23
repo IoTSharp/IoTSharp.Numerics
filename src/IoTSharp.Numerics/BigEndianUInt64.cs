@@ -12,18 +12,23 @@ using System.Threading.Tasks;
 namespace IoTSharp.Numerics
 {
 
-
+#if NET8_0 || NET9_0
     [InlineArray(8)]
     struct BEUI64
     {
         byte Value;
     }
+#endif
+
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
     public struct BigEndianUInt64 : IEquatable<BigEndianUInt64>
     {
         [MarshalAs(UnmanagedType.Struct, SizeConst = 1)]
+#if NET8_0 || NET9_0
         BEUI64 data;
-
+#elif NET10_0_OR_GREATER
+        InlineArray8<byte> data;
+#endif
 
         public static implicit operator ulong(BigEndianUInt64 d)
         {
