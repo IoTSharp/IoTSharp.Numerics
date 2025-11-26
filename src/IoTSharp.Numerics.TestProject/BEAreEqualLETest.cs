@@ -22,7 +22,7 @@
         [TestMethod]
         public void BEU64()
         {
-            Assert.AreEqual((UInt64)(BigEndianUInt64)(new byte[] { 0x12, 0x34, 0x56, 0x78, 0x12, 0x34, 0x56, 0x78 }), (UInt64)0x1234567812345678);
+            Assert.AreEqual((UInt64)0x1234567812345678, (UInt64)(BigEndianUInt64)(new byte[] { 0x12, 0x34, 0x56, 0x78, 0x12, 0x34, 0x56, 0x78 }));
         }
     }
 }
