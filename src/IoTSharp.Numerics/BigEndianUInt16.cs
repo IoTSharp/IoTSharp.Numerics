@@ -6,23 +6,13 @@ using System.Runtime.InteropServices;
 
 namespace IoTSharp.Numerics
 {
-#if NET8_0 || NET9_0
-    [InlineArray(2)]
-    struct BEUI16
-    {
-        byte Value;
-    }
-#endif
+ 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
     public struct BigEndianUInt16 : IEquatable<BigEndianUInt16>
     {
-#if NET8_0 || NET9_0
-        [MarshalAs(UnmanagedType.Struct, SizeConst = 1)]
-        BEUI16 data;
-#elif NET10_0_OR_GREATER
+
         [MarshalAs(UnmanagedType.Struct, SizeConst = 1)]
         InlineArray2<byte>   data;
-#endif
         public static implicit operator ushort(BigEndianUInt16 d)
         {
             return BinaryPrimitives.ReadUInt16BigEndian(d.data);
